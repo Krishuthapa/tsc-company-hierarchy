@@ -18,7 +18,7 @@ class EmployeeOrgApp implements IEmployeeOrgApp {
   move(employeeID: number, supervisorID: number) {
     const { subordinates } = this.ceo;
     
-    // The node of the employee of the give employeeId is fethed from the hierarchy and its children are attached to its parent.
+    // The node of the employee of the give employeeId is fetched from the subordinates hierarchy and its children are attached to its parent.
  
     const hierarchyInfoAfterRemoval = this.getNewHierarchyWithRemovedEmployee(
       subordinates,
@@ -31,7 +31,7 @@ class EmployeeOrgApp implements IEmployeeOrgApp {
       return;
     }
 
-    // The above removed node is attached to the given supervisorId as its child.
+    // The above removed employee node is attached to the given supervisorId as its child.
 
     const employeeForAddtion = hierarchyInfoAfterRemoval.removedEmployee;
     const subordinatesForAddingEmployee =

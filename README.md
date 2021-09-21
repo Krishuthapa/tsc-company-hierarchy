@@ -1,5 +1,5 @@
 # tsc-company-hierarchy
-Using typescript to display company hierarchy and alter the hierarchy
+Using typescript to display company hierarchy and alter the hierarchy. Used the concept of DFS supported by recursion to solve the problem.
 
 Main file for execution : https://github.com/Krishuthapa/tsc-company-hierarchy/blob/main/scripts/EmployeeOrgApp.ts
 

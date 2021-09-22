@@ -18,6 +18,12 @@ class EmployeeOrgApp implements IEmployeeOrgApp {
   move(employeeID: number, supervisorID: number) {
     const { subordinates } = this.ceo;
     
+    if(employeeID === this.ceo.uniqueId){
+      console.error("Cannot move the CEO of the company to be a sub odinate.");
+
+      return;
+    }
+    
     // The node of the employee of the give employeeId is fetched from the subordinates hierarchy and its children are attached to its parent.
  
     const hierarchyInfoAfterRemoval = this.getNewHierarchyWithRemovedEmployee(
@@ -35,11 +41,11 @@ class EmployeeOrgApp implements IEmployeeOrgApp {
 
     const employeeForAddtion = hierarchyInfoAfterRemoval.removedEmployee;
     const subordinatesForAddingEmployee =
-      hierarchyInfoAfterRemoval.updatedSubordinates;
-
+      {...this.ceo, subordinates:hierarchyInfoAfterRemoval.updatedSubordinates};
+    
     const finalUpdatedHierarchy = this.getNewHierarchyAfterAddedEmployee(
       employeeForAddtion,
-      subordinatesForAddingEmployee,
+      [subordinatesForAddingEmployee],
       supervisorID
     );
 
@@ -50,7 +56,7 @@ class EmployeeOrgApp implements IEmployeeOrgApp {
     }
 
     this.oldCeoHierarchy = this.ceo;
-    this.ceo = { ...this.ceo, subordinates: finalUpdatedHierarchy };
+    this.ceo = finalUpdatedHierarchy[0];
   }
 
   /**
